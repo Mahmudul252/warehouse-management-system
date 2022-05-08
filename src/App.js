@@ -1,10 +1,11 @@
-import logo from './logo.svg';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
 
+      <ToastContainer />
     </div>
   );
 }
