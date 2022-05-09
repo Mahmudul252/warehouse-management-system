@@ -12,6 +12,7 @@ import RequireAuth from './pages/RequireAuth/RequireAuth';
 import Reviews from './pages/Reviews/Reviews';
 import Header from './pages/shared/Header/Header';
 import Update from './pages/Update/Update';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (

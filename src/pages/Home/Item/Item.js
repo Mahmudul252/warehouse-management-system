@@ -3,7 +3,7 @@ import './Item.css';
 
 const Item = ({ item }) => {
     const handleUpdateButton = _id => {
-        console.log('clicked', _id)
+        // console.log('clicked', _id)
     }
     const { _id, itemName, img, description, quantity, price, supplier } = item;
     return (
