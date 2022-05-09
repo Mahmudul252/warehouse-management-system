@@ -6,7 +6,7 @@ const Items = () => {
     const [items] = useItems();
     return (
         <div className='row justify-content-center'>
-            <h2 className='text-center'>Inventory</h2>
+            <h2 className='text-center display-6 mb-3'>Inventory</h2>
             {
                 items.map(item => <Item
                     key={item._id}

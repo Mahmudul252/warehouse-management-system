@@ -1,0 +1,15 @@
+.custom-bg-color {
+    background-color: rgb(177, 177, 177);
+}
+
+.youtube-video {
+    width: 560px;
+    height: 315px;
+}
+
+@media only screen and (max-width: 992px) {
+    .youtube-video {
+        width: auto;
+        height: 315px;
+    }
+}

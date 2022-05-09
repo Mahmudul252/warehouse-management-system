@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
 const Header = () => {
@@ -10,7 +11,7 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#features">Services</Nav.Link>
+                            <Nav.Link as={Link} to='/inventory'>Inventory</Nav.Link>
                             <Nav.Link href="#pricing">Pricing</Nav.Link>
                             <Nav.Link href="#pricing">Reviews</Nav.Link>
                             <Nav.Link href="#pricing">About Us</Nav.Link>
