@@ -5,7 +5,7 @@ const LearnMore = () => {
     return (
         <div className='container my-5 d-flex flex-column flex-lg-row align-items-center p-4 rounded gap-4 custom-bg-color'>
             <div>
-                <iframe className='rounded youtube-video' src="https://www.youtube.com/embed/ANxjuXUpItg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe className='rounded youtube-video' src="https://www.youtube.com/embed/ANxjuXUpItg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
             <div>
                 <h2 className='display-6'>What we are working</h2>

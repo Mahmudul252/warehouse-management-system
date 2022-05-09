@@ -4,18 +4,18 @@ import './App.css';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Home from './pages/Home/Home/Home';
 import Items from './pages/Home/Items/Items';
-import Login from './pages/Login/Login';
+import Login from './pages/Login/Login/Login';
+import SignUp from './pages/Login/SignUp/SignUp';
 import NotFound from './pages/NotFound/NotFound';
 import Pricing from './pages/Pricing/Pricing';
 import RequireAuth from './pages/RequireAuth/RequireAuth';
 import Reviews from './pages/Reviews/Reviews';
 import Header from './pages/shared/Header/Header';
-import SignUp from './pages/SignUp/SignUp';
 import Update from './pages/Update/Update';
 
 function App() {
   return (
-    <div>
+    <div className='pt-5'>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
