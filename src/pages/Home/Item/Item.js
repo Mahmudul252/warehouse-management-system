@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import useItems from '../../../hooks/useItems';
 import './Item.css';
 
 const Item = ({ item }) => {
-    const handleUpdateButton = _id => {
-        // console.log('clicked', _id)
-    }
+    const [items] = useItems();
+    const newItems = items;
     const { _id, itemName, img, description, quantity, price, supplier } = item;
     return (
         <div className="card col-sm-12 col-lg-4 card-width">
@@ -16,8 +17,11 @@ const Item = ({ item }) => {
                 <h5>Price: ${price}</h5>
                 <h6>Supplier: {supplier}</h6>
             </div>
-            <div className="card-footer border-0 bg-white">
-                <button onClick={() => handleUpdateButton(_id)} className="btn btn-secondary w-100">Update</button>
+            <div className="card-footer border-0 bg-white d-flex justify-content-center">
+                <Link to={{
+                    pathname: `/inventory/${_id}`,
+                    state: newItems
+                }} className='btn btn-secondary w-75'>Update</Link>
             </div>
         </div>
 

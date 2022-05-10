@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className='pt-5'>
+    <div className='mt-5 pt-2'>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
@@ -27,7 +27,7 @@ function App() {
         <Route path='/about' element={<AboutUs></AboutUs>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
-        <Route path='/inventory/:id' element={
+        <Route path='/inventory/:_id' element={
           <RequireAuth>
             <Update></Update>
           </RequireAuth>
