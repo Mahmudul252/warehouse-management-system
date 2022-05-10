@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import './Update.css';
 
 const Update = () => {
     const { id } = useParams();
     const [item, setItem] = useState({});
     const [updatedItem, setUpdatedItem] = useState({});
+    const [empty, setEmpty] = useState(false);
     const { itemName, img, description, price, quantity, supplier, _id } = item;
     const url = `http://localhost:5000/services/${id}`;
 
@@ -16,11 +18,10 @@ const Update = () => {
             .then(data => setItem(data))
     }, [updatedItem])
 
-    const newQuantity = quantity - 1;
+    const newQuantity = parseInt(quantity) - 1;
     const handleDeliveredButton = () => {
         const quantity = newQuantity;
         const newItem = { itemName, img, description, price, quantity, supplier };
-        setUpdatedItem(newItem);
 
         fetch(url, {
             method: 'PUT',
@@ -30,30 +31,42 @@ const Update = () => {
             body: JSON.stringify(newItem)
         })
             .then(res => res.json())
-            .then(data => {
+            .then(() => {
+                setUpdatedItem(newItem);
                 toast('Item updated successfully!');
-            })
+            });
+
+
     }
 
     const handleRestockButton = event => {
         event.preventDefault();
         const restockItem = event.target.quantity.value;
-        const newQuantity = parseInt(quantity) + parseInt(restockItem);
-        if (1) {
-            const quantity = newQuantity;
-            const newItem = { itemName, img, description, price, quantity, supplier };
-            setUpdatedItem(newItem);
-            fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(newItem)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    toast('Item restocked successfully!');
+        if (restockItem) {
+            const newQuantity = parseInt(quantity) + parseInt(restockItem);
+            //putting everything inside if for limiting variable scope
+            if (1) {
+                const quantity = newQuantity;
+                const newItem = { itemName, img, description, price, quantity, supplier };
+
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newItem)
                 })
+                    .then(res => res.json())
+                    .then(() => {
+                        setUpdatedItem(newItem);
+                        toast(`${restockItem} item restocked successfully!`);
+                    });
+
+            }
+            setEmpty(false);
+        }
+        else {
+            setEmpty(true);
         }
         event.target.reset();
     }
@@ -65,21 +78,24 @@ const Update = () => {
                 <div>
                     <img src={img} alt="" className='rounded-3 img-fluid' />
                 </div>
-                <div style={{ width: '40%' }}>
+                <div className='update-details'>
                     <h4>Name: {itemName}</h4>
                     <b><small>Product ID: {_id}</small></b>
                     <p>{description}</p>
                     <h6>Quantity: {quantity}</h6>
                     <h6>Price: ${price}</h6>
                     <h6>Supplier: {supplier}</h6>
-                    <button onClick={handleDeliveredButton} className="btn btn-secondary w-25">Delivered</button>
+                    <button onClick={handleDeliveredButton} className="btn btn-secondary delivered-button">Delivered</button>
                 </div>
                 <div>
                     <Form onSubmit={handleRestockButton}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label className='fw-bold'>Restock Item</Form.Label>
-                            <Form.Control type="number" name="quantity" placeholder="Enter restock quantity" />
+                            <Form.Control onFocus={() => setEmpty(false)} type="number" name="quantity" placeholder="Enter restock quantity" />
                         </Form.Group>
+                        {
+                            empty ? <p className='text-danger'>Please enter quantity</p> : ''
+                        }
                         <Button variant="secondary" type="submit">
                             Restock Now
                         </Button>
