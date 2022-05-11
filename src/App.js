@@ -13,6 +13,7 @@ import Reviews from './pages/Reviews/Reviews';
 import Header from './pages/shared/Header/Header';
 import Update from './pages/Update/Update';
 import 'react-toastify/dist/ReactToastify.css';
+import ManageInventories from './pages/ManageInventories/ManageInventories';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/about' element={<AboutUs></AboutUs>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/manage-inventories' element={<ManageInventories></ManageInventories>}></Route>
         <Route path='/inventory/:id' element={
           <RequireAuth>
             <Update></Update>

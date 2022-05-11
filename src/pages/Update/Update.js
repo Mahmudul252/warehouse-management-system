@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './Update.css';
 
@@ -16,7 +16,7 @@ const Update = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setItem(data))
-    }, [updatedItem])
+    }, [updatedItem]);
 
     const newQuantity = parseInt(quantity) - 1;
     const handleDeliveredButton = () => {
@@ -102,6 +102,7 @@ const Update = () => {
                     </Form>
                 </div>
             </div>
+            <Link className='btn btn-secondary my-5 w-25 mx-auto d-block' to='/inventory'>Manage Inventories</Link>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../shared/Footer/Footer';
 import AdvancedFeatures from '../AdvancedFeatures/AdvancedFeatures';
 import Items from '../Items/Items';
@@ -11,6 +12,7 @@ const Home = () => {
             <Slider></Slider>
             <div className="container mt-5">
                 <Items></Items>
+                <Link className='btn btn-secondary my-5 w-25 d-block mx-auto' to='/manage-inventories'>Manage Inventories</Link>
             </div>
             <LearnMore></LearnMore>
             <AdvancedFeatures></AdvancedFeatures>

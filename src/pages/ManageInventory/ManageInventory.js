@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Item.css';
+import React, { useEffect, useState } from 'react';
+import useItems from '../../hooks/useItems';
 
-const Item = ({ item }) => {
+const ManageInventory = ({ item, handleDeleteButton }) => {
     const { _id, itemName, img, description, quantity, price, supplier } = item;
+
     return (
         <div className="card col-sm-12 col-lg-4 card-width">
             <img src={img} className="card-img-top rounded-3 mt-2 item-img" alt="..." />
@@ -15,11 +15,11 @@ const Item = ({ item }) => {
                 <h6>Supplier: {supplier}</h6>
             </div>
             <div className="card-footer border-0 bg-white d-flex justify-content-center">
-                <Link to={`/inventory/${_id}`} className='btn btn-secondary w-75'>Update</Link>
+                <button onClick={() => handleDeleteButton(_id)} className='btn btn-secondary w-75'>Delete</button>
             </div>
         </div>
 
     );
 };
 
-export default Item;
+export default ManageInventory;
