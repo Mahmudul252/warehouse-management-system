@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ManageInventory from '../ManageInventory/ManageInventory';
 
@@ -27,19 +29,36 @@ const ManageInventories = () => {
                     }
                 });
         }
-        // console.log('clicked', _id)
     }
 
     return (
-        <div className='row justify-content-center mx-auto'>
-            <h2 className='text-center display-6 mb-3 mt-3'>Manage Inventories</h2>
-            {
-                allItems.map(item => <ManageInventory
-                    key={item._id}
-                    item={item}
-                    handleDeleteButton={handleDeleteButton}
-                ></ManageInventory>)
-            }
+        <div>
+            <div className='row justify-content-center mx-auto'>
+                <h2 className='text-center display-6 mb-3 mt-3'>Manage Inventories</h2>
+
+                <Table striped bordered hover className='w-75'>
+                    <thead>
+                        <tr className='text-center'>
+                            <th>Item ID</th>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Supplier</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            allItems.map(item => <ManageInventory
+                                key={item._id}
+                                item={item}
+                                handleDeleteButton={handleDeleteButton}
+                            ></ManageInventory>)
+                        }
+                    </tbody>
+                </Table>
+            </div>
+            <Link to='/add-inventory' className="btn btn-secondary w-25 d-block mx-auto mb-5">Add New Item</Link>
         </div>
     );
 };

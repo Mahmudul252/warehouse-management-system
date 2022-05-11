@@ -42,10 +42,11 @@ const SignUp = () => {
         createUserWithEmailAndPassword(email, password)
             .then(async () => {
                 await updateProfile({ displayName });
-                toast("Email Verification Sent")
+                toast("Email Verification Sent");
                 await sendEmailVerification();
             })
-            .then(() => navigate(from, { replace: true }));
+            .then(() => navigate('/verify-user', { replace: true }));
+
 
     }
 

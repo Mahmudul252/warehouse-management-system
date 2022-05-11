@@ -13,6 +13,9 @@ const RequireAuth = ({ children }) => {
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace></Navigate>
     }
+    else if (!user.emailVerified) {
+        return <Navigate to="/verify-user" state={{ from: location }} replace></Navigate>
+    }
     return children;
 };
 

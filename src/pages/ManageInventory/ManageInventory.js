@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import useItems from '../../hooks/useItems';
+import React from 'react';
 
 const ManageInventory = ({ item, handleDeleteButton }) => {
-    const { _id, itemName, img, description, quantity, price, supplier } = item;
+    const { _id, itemName, quantity, supplier, price } = item;
 
     return (
-        <div className="card col-sm-12 col-lg-4 card-width">
-            <img src={img} className="card-img-top rounded-3 mt-2 item-img" alt="..." />
-            <div className="card-body">
-                <h4 className="card-title">{itemName}</h4>
-                <p className="card-text">{description}</p>
-                <h5>Quantity: {quantity}</h5>
-                <h5>Price: ${price}</h5>
-                <h6>Supplier: {supplier}</h6>
-            </div>
-            <div className="card-footer border-0 bg-white d-flex justify-content-center">
-                <button onClick={() => handleDeleteButton(_id)} className='btn btn-secondary w-75'>Delete</button>
-            </div>
-        </div>
-
+        <tr className='text-center'>
+            <td style={{ width: '18%' }}>{_id}</td>
+            <td style={{ width: '10%' }}>{itemName}</td>
+            <td style={{ width: '10%' }}>{quantity}</td>
+            <td style={{ width: '10%' }}>{price}</td>
+            <td style={{ width: '20%' }}>{supplier}</td>
+            <td style={{ width: '7%' }}><button onClick={() => handleDeleteButton(_id)} className='btn btn-secondary'>Delete</button></td>
+        </tr>
     );
 };
 

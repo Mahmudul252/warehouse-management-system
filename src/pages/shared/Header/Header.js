@@ -10,7 +10,7 @@ const Header = () => {
     const handleUserSignOut = () => {
         signOut(auth);
     }
-    // console.log(user)
+    // console.log(user.emailVerified)
     return (
         <nav>
             <Navbar className='fixed-top' collapseOnSelect expand="lg" bg="dark" variant="dark">
