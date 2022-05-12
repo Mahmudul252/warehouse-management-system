@@ -6,7 +6,6 @@ import Home from './pages/Home/Home/Home';
 import Login from './pages/Login/Login/Login';
 import SignUp from './pages/Login/SignUp/SignUp';
 import NotFound from './pages/NotFound/NotFound';
-import Pricing from './pages/Pricing/Pricing';
 import RequireAuth from './pages/RequireAuth/RequireAuth';
 import Reviews from './pages/Reviews/Reviews';
 import Header from './pages/shared/Header/Header';
@@ -15,6 +14,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ManageInventories from './pages/ManageInventories/ManageInventories';
 import VerifyUser from './pages/Login/VerifyUser/VerifyUser';
 import AddNewInventory from './pages/AddNewInventory/AddNewInventory';
+import Items from './pages/Home/Items/Items';
+import MyItems from './pages/MyItems/MyItems';
 
 function App() {
   return (
@@ -23,11 +24,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/pricing' element={<Pricing></Pricing>}></Route>
         <Route path='/reviews' element={<Reviews></Reviews>}></Route>
         <Route path='/about' element={<AboutUs></AboutUs>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/inventory' element={<Items></Items>}></Route>
         <Route path='/manage-inventories' element={
           <RequireAuth>
             <ManageInventories></ManageInventories>
@@ -43,7 +44,16 @@ function App() {
             <Update></Update>
           </RequireAuth>
         }></Route>
-        <Route path='/verify-user' element={<VerifyUser></VerifyUser>}></Route>
+        <Route path='/verify-user' element={
+          <RequireAuth>
+            <VerifyUser></VerifyUser>
+          </RequireAuth>
+        }></Route>
+        <Route path='/my-items' element={
+          <RequireAuth>
+            <MyItems></MyItems>
+          </RequireAuth>
+        }></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />

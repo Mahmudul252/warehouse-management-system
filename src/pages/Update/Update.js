@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
+import UserVerification from '../Login/UserVerification/UserVerification';
 import './Update.css';
 
 const Update = () => {
@@ -10,8 +13,11 @@ const Update = () => {
     const [updatedItem, setUpdatedItem] = useState({});
     const [empty, setEmpty] = useState(false);
     const { itemName, img, description, price, quantity, supplier, _id } = item;
-    const url = `http://localhost:5000/services/${id}`;
 
+    const [user] = useAuthState(auth);
+    UserVerification(user);
+
+    const url = `http://localhost:5000/services/${id}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -61,7 +67,6 @@ const Update = () => {
                         setUpdatedItem(newItem);
                         toast(`${restockItem} item restocked successfully!`);
                     });
-
             }
             setEmpty(false);
         }

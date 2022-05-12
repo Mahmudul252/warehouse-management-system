@@ -7,10 +7,10 @@ import { signOut } from 'firebase/auth';
 
 const Header = () => {
     const [user] = useAuthState(auth);
+    console.log(user)
     const handleUserSignOut = () => {
         signOut(auth);
     }
-    // console.log(user.emailVerified)
     return (
         <nav>
             <Navbar className='fixed-top' collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -19,11 +19,15 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
+                            <Nav.Link as={Link} to='/inventory'>Inventory</Nav.Link>
                             <Nav.Link as={Link} to='/manage-inventories'>Manage Inventories</Nav.Link>
-                            <Nav.Link as={Link} to='/pricing'>Pricing</Nav.Link>
-                            <Nav.Link as={Link} to='/reviews'>Reviews</Nav.Link>
+                            {
+                                user && <div className='d-flex'>
+                                    <Nav.Link as={Link} to='/my-items'>My Items</Nav.Link>
+                                    <Nav.Link as={Link} to='/add-inventory'>Add New Item</Nav.Link>
+                                </div>
+                            }
                             <Nav.Link as={Link} to='/about'>About Us</Nav.Link>
-
                         </Nav>
                         <Nav>
                             {

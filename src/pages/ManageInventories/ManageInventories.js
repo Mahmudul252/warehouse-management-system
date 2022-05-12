@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
+import UserVerification from '../Login/UserVerification/UserVerification';
 import ManageInventory from '../ManageInventory/ManageInventory';
 
 const ManageInventories = () => {
+    const [user] = useAuthState(auth);
+    UserVerification(user);
     const [allItems, setAllItems] = useState([]);
 
     useEffect(() => {

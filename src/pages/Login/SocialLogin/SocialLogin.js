@@ -1,27 +1,26 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
 const SocialSignIn = ({ from }) => {
     const navigate = useNavigate();
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [signInWithGithub] = useSignInWithGithub(auth);
+    const [user] = useAuthState(auth);
+
     const handleSocialSignIn = method => {
         if (method === 'google') {
-            signInWithGoogle()
-                .then(() => {
-                    navigate(from, { replace: true });
-                })
+            signInWithGoogle();
         }
         if (method === 'github') {
-            signInWithGithub()
-                .then(() => {
-                    navigate(from, { replace: true });
-                })
+            signInWithGithub();
         }
+    }
+    if (user) {
+        navigate(from, { replace: true });
     }
     return (
         <div>

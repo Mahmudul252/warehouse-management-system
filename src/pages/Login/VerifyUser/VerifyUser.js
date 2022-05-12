@@ -17,7 +17,6 @@ const VerifyUser = () => {
         else {
             alert('Email not verified!');
         }
-
     }
     const handleEmailVerificationButton = async () => {
         await sendEmailVerification();

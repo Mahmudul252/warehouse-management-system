@@ -45,7 +45,7 @@ const Slider = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-    </div>
+    </div >
   );
 };
 

@@ -1,8 +1,17 @@
 import React from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import useMyItems from '../../hooks/useMyItems';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import UserVerification from '../Login/UserVerification/UserVerification';
 
 const AddNewInventory = () => {
+    const [myItem, setMyItem] = useMyItems();
+    const [user] = useAuthState(auth);
+    UserVerification(user);
+    const url = `http://localhost:5000/services`;
+
     const handleAddButton = event => {
         event.preventDefault();
         const itemName = event.target.itemName.value;
@@ -12,9 +21,12 @@ const AddNewInventory = () => {
         const img = event.target.img.value;
         const description = event.target.description.value;
 
-        const item = { itemName, supplier, quantity, price, img, description };
+        const userEmail = user?.email;
+        const customID = JSON.stringify(Math.random());
+        const item = { customID, itemName, supplier, quantity, price, img, description };
+        const addedItem = { ...item, userEmail };
 
-        fetch('http://localhost:5000/services', {
+        fetch(url, {
             method: 'post',
             headers: {
                 'content-type': 'application/json'
@@ -22,14 +34,15 @@ const AddNewInventory = () => {
             body: JSON.stringify(item)
         })
             .then(res => res.json())
-            .then(data => {
+            .then(() => {
                 toast('Item added successfully!');
+                setMyItem(addedItem);
                 event.target.reset();
             });
 
     }
     return (
-        <div className='mt-3 w-50 mx-auto'>
+        <div className='mt-3 mb-5 w-50 mx-auto'>
             <h2 className='display-6 my-3 text-center'>Add New Inventory</h2>
             <Form onSubmit={handleAddButton}>
                 {/* itemName */}

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
-import SocialLogin from '../../shared/SocialLogin/SocialLogin';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [displayName, setDisplayName] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordMatched, setPasswordMatched] = useState(false);
@@ -18,12 +16,6 @@ const SignUp = () => {
     const [updateProfile] = useUpdateProfile(auth);
     const [sendEmailVerification] = useSendEmailVerification(auth);
 
-    const handleUserName = event => {
-        setDisplayName(event.target.value);
-    }
-    const handleUserEmail = event => {
-        setEmail(event.target.value);
-    }
     const handleUserPassword = event => {
         setPassword(event.target.value);
     }
@@ -37,8 +29,11 @@ const SignUp = () => {
         }
     }
     const from = location?.state?.from?.pathname || '/';
+
     const handleCreateNewUser = (event) => {
         event.preventDefault();
+        const displayName = event.target.name.value;
+        const email = event.target.email.value;
         createUserWithEmailAndPassword(email, password)
             .then(async () => {
                 await updateProfile({ displayName });
@@ -46,31 +41,29 @@ const SignUp = () => {
                 await sendEmailVerification();
             })
             .then(() => navigate('/verify-user', { replace: true }));
-
-
     }
 
     return (
         <div className='login-form mx-auto mt-5'>
             <h2 className='mb-3'>Please Sign Up</h2>
             <Form onSubmit={handleCreateNewUser}>
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Your Name</Form.Label>
-                    <Form.Control onBlur={handleUserName} type="name" placeholder="Enter Your Name" required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control onBlur={handleUserEmail} type="email" placeholder="Enter email" required />
-                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={handleUserPassword} type="password" placeholder="Password" required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Retype Password</Form.Label>
-                    <input onChange={handleUserRetypePassword} placeholder="Retype your Password" required type="password" id="formBasicRetypePassword" className="form-control"></input>
-                </Form.Group>
+                <FloatingLabel controlId="userName" label="Enter Your Name" className="mb-3">
+                    <Form.Control name="name" type="text" placeholder="Enter Your Name" required />
+                </FloatingLabel>
+
+                <FloatingLabel controlId="userEmail" label="Enter Your Email" className="mb-3">
+                    <Form.Control name="email" type="email" placeholder="Enter Email" required />
+                </FloatingLabel>
+
+                <FloatingLabel controlId="userPassword" label="Enter Password" className="mb-3">
+                    <Form.Control onBlur={handleUserPassword} name="password" type="password" placeholder="Enter Password" required />
+                </FloatingLabel>
+
+                <FloatingLabel controlId="userPassword2" label="ReEnter Password" className="mb-3">
+                    <Form.Control onChange={handleUserRetypePassword} name="password2" type="password" placeholder="ReEnter Password" required />
+                </FloatingLabel>
+
                 {!passwordMatched && <p className="text-danger">{errorMessage}</p>}
                 {loading && <p className="text-danger">Loading...</p>}
                 {error && <p className="text-danger">{error.message}</p>}
