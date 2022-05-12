@@ -7,7 +7,6 @@ import { signOut } from 'firebase/auth';
 
 const Header = () => {
     const [user] = useAuthState(auth);
-    console.log(user)
     const handleUserSignOut = () => {
         signOut(auth);
     }
@@ -27,6 +26,7 @@ const Header = () => {
                                     <Nav.Link as={Link} to='/add-inventory'>Add New Item</Nav.Link>
                                 </div>
                             }
+                            <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
                             <Nav.Link as={Link} to='/about'>About Us</Nav.Link>
                         </Nav>
                         <Nav>

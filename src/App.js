@@ -16,6 +16,7 @@ import VerifyUser from './pages/Login/VerifyUser/VerifyUser';
 import AddNewInventory from './pages/AddNewInventory/AddNewInventory';
 import Items from './pages/Home/Items/Items';
 import MyItems from './pages/MyItems/MyItems';
+import Blogs from './pages/Blogs/Blogs';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
             <MyItems></MyItems>
           </RequireAuth>
         }></Route>
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer />

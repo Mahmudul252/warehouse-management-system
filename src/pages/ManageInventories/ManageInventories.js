@@ -18,7 +18,7 @@ const ManageInventories = () => {
             .then(data => setAllItems(data))
     }, []);
 
-    const handleDeleteButton = _id => {
+    const handleDeleteButton = (_id, customID) => {
         const proceed = window.confirm('Are you sure you want to delete?');
         if (proceed) {
             const url = `http://localhost:5000/services/${_id}`;
@@ -30,6 +30,10 @@ const ManageInventories = () => {
                     if (data.deletedCount > 0) {
                         const remaining = allItems.filter(item => item._id !== _id);
                         setAllItems(remaining);
+
+                        const userStoredItems = JSON.parse(localStorage.getItem(user.email));
+                        const userRemainingItems = userStoredItems?.filter(userStoredItem => userStoredItem.customID !== customID);
+                        localStorage.setItem(user?.email, JSON.stringify(userRemainingItems));
                         toast('Item Deleted!')
                     }
                 });
