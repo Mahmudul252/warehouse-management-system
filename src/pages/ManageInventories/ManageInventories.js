@@ -39,7 +39,7 @@ const ManageInventories = () => {
     return (
         <div>
             <div className='row justify-content-center mx-auto'>
-                <h2 className='text-center display-6 mb-3 mt-3'>Manage Inventories</h2>
+                <h2 className='text-center display-6 mb-3 mt-3'>Manage Inventories ({allItems.length})</h2>
 
                 <Table striped bordered hover className='w-75'>
                     <thead>

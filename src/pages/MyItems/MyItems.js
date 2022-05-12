@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import useItems from '../../hooks/useItems';
 import MyItem from '../MyItem/MyItem';
@@ -18,9 +18,8 @@ const MyItems = () => {
         const userItem = items.find(item => item.customID === userStoredItem.customID);
         userItems = [...userItems, userItem];
     });
-    console.log(userItems);
 
-    const handleDeleteButton = _id => {
+    const handleDeleteButton = (_id, customID) => {
         const proceed = window.confirm('Are you sure you want to delete?');
         if (proceed) {
             const url = `http://localhost:5000/services/${_id}`;
@@ -32,6 +31,9 @@ const MyItems = () => {
                     if (data.deletedCount > 0) {
                         const remaining = myStoredItems.filter(item => item._id !== _id);
                         setMyStoredItems(remaining);
+
+                        const userRemainingItems = userStoredItems?.filter(userStoredItem => userStoredItem.customID !== customID);
+                        localStorage.setItem(user?.email, JSON.stringify(userRemainingItems));
                         toast('Item Deleted!');
                     }
                 });
@@ -42,11 +44,13 @@ const MyItems = () => {
             <div className='row justify-content-center mx-auto'>
                 <h2 className='text-center display-6 mb-3 mt-3'>My Items</h2>
                 {
-                    myStoredItems.map(item => <MyItem
-                        key={item._id}
-                        item={item}
-                        handleDeleteButton={handleDeleteButton}
-                    ></MyItem>)
+                    userItems.map(userItem =>
+                        <MyItem
+                            key={Math.random()}
+                            userItem={userItem}
+                            handleDeleteButton={handleDeleteButton}
+                        ></MyItem>
+                    )
                 }
             </div>
         </div>

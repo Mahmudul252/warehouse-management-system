@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MyItem = ({ item, handleDeleteButton }) => {
-    const { _id, itemName, img, description, quantity, price, supplier } = item;
+const MyItem = ({ userItem, handleDeleteButton }) => {
+    const { _id, customID, itemName, img, description, quantity, price, supplier } = userItem || {};
     return (
         <div className="card col-sm-12 col-lg-4 card-width">
             <img src={img} className="card-img-top rounded-3 mt-2 item-img" alt="..." />
@@ -13,7 +13,7 @@ const MyItem = ({ item, handleDeleteButton }) => {
                 <h6>Supplier: {supplier}</h6>
             </div>
             <div className="card-footer border-0 bg-white d-flex justify-content-center">
-                <button onClick={() => handleDeleteButton(_id)} className='btn btn-secondary'>Delete</button>
+                <button onClick={() => handleDeleteButton(_id, customID)} className='btn btn-secondary w-50'>Delete</button>
             </div>
         </div>
 
