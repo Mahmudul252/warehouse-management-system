@@ -6,6 +6,7 @@ import './Login.css';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import SocialSignIn from '../SocialLogin/SocialLogin';
+import PageTitle from '../../shared/PageTitle/PageTitle';
 
 const Login = () => {
     const location = useLocation();
@@ -37,6 +38,7 @@ const Login = () => {
 
     return (
         <div className='mx-auto mt-5 login-form'>
+            <PageTitle title="Login"></PageTitle>
             <h2 className='mb-3 display-6'>Please Login</h2>
             <Form onSubmit={handleUserLogin}>
 

@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import UserVerification from '../Login/UserVerification/UserVerification';
+import PageTitle from '../shared/PageTitle/PageTitle';
 import './Update.css';
 
 const Update = () => {
@@ -78,6 +79,7 @@ const Update = () => {
 
     return (
         <div className='container my-3'>
+            <PageTitle title="Update Inventory"></PageTitle>
             <h2>Update Info for: {itemName}</h2>
             <div className="d-flex flex-column flex-lg-row align-items-center justify-content-center border gap-4 rounded-3 p-4 ">
                 <div>

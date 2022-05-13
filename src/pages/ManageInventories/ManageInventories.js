@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import UserVerification from '../Login/UserVerification/UserVerification';
 import ManageInventory from '../ManageInventory/ManageInventory';
+import PageTitle from '../shared/PageTitle/PageTitle';
 
 const ManageInventories = () => {
     const [user] = useAuthState(auth);
@@ -38,6 +39,7 @@ const ManageInventories = () => {
 
     return (
         <div>
+            <PageTitle title="Manage Inventories"></PageTitle>
             <div className='row justify-content-center mx-auto'>
                 <h2 className='text-center display-6 mb-3 mt-3'>Manage Inventories ({allItems.length})</h2>
 

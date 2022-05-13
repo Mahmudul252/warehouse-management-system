@@ -5,6 +5,7 @@ import MyItem from '../MyItem/MyItem';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import UserVerification from '../Login/UserVerification/UserVerification';
+import PageTitle from '../shared/PageTitle/PageTitle';
 
 const MyItems = () => {
     const [items] = useItems();
@@ -39,6 +40,7 @@ const MyItems = () => {
     }
     return (
         <div>
+            <PageTitle title="My Items"></PageTitle>
             <div className='row justify-content-center mx-auto'>
                 <h2 className='text-center display-6 mb-3 mt-3'>My Items</h2>
                 {

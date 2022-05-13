@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../../../firebase.init';
-import UserVerification from '../../Login/UserVerification/UserVerification';
 import Footer from '../../shared/Footer/Footer';
 import AdvancedFeatures from '../AdvancedFeatures/AdvancedFeatures';
 import Items from '../Items/Items';
@@ -11,8 +7,6 @@ import LearnMore from '../LearnMore/LearnMore';
 import Slider from '../Slider/Slider';
 
 const Home = () => {
-
-
     return (
         <div>
             <Slider></Slider>

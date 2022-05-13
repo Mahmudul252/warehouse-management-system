@@ -1,10 +1,12 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import PageTitle from '../shared/PageTitle/PageTitle';
 import './Blogs.css';
 
 const Blogs = () => {
     return (
         <div className='blogs mx-auto my-4'>
+            <PageTitle title="Blogs"></PageTitle>
             <div style={{ borderRadius: '20px' }} className='border border-5 border-warning p-3 m-3'>
                 <h2 className='fs-2 fw-normal text-center'>Difference between javascript and nodejs</h2>
                 <Table striped bordered hover>

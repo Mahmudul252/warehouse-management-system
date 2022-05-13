@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import UserVerification from '../Login/UserVerification/UserVerification';
+import PageTitle from '../shared/PageTitle/PageTitle';
 
 const AddNewInventory = () => {
     const [user] = useAuthState(auth);
@@ -37,6 +38,7 @@ const AddNewInventory = () => {
     }
     return (
         <div className='mt-3 mb-5 w-50 mx-auto'>
+            <PageTitle title="Add New Items"></PageTitle>
             <h2 className='display-6 my-3 text-center'>Add New Inventory</h2>
             <Form onSubmit={handleAddButton}>
                 {/* itemName */}

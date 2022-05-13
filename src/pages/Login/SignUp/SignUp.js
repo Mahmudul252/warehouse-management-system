@@ -4,6 +4,7 @@ import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateP
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
+import PageTitle from '../../shared/PageTitle/PageTitle';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
@@ -45,6 +46,7 @@ const SignUp = () => {
 
     return (
         <div className='login-form mx-auto mt-5'>
+            <PageTitle title="Sign Up"></PageTitle>
             <h2 className='mb-3'>Please Sign Up</h2>
             <Form onSubmit={handleCreateNewUser}>
 

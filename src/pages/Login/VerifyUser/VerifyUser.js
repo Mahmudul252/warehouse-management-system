@@ -3,6 +3,7 @@ import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/aut
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
+import PageTitle from '../../shared/PageTitle/PageTitle';
 
 const VerifyUser = () => {
     const [user] = useAuthState(auth);
@@ -24,6 +25,7 @@ const VerifyUser = () => {
     }
     return (
         <div className='d-flex justify-content-center mt-5'>
+            <PageTitle title="Verify User"></PageTitle>
             <div>
                 <h5 className='display-6'>Email verification sent!</h5>
                 <p className='fs-3'>Please check your mail inbox and verify email.</p>
