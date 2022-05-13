@@ -13,7 +13,7 @@ const ManageInventories = () => {
     const [allItems, setAllItems] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://gentle-depths-46092.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setAllItems(data))
     }, []);
@@ -21,7 +21,7 @@ const ManageInventories = () => {
     const handleDeleteButton = _id => {
         const proceed = window.confirm('Are you sure you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/services/${_id}`;
+            const url = `https://gentle-depths-46092.herokuapp.com/services/${_id}`;
             fetch(url, {
                 method: 'delete'
             })

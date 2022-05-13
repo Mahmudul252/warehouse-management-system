@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Login.css';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
-import UserVerification from '../UserVerification/UserVerification';
 import SocialSignIn from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const location = useLocation();
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [resetClicked, setResetClicked] = useState(false);
     const [

@@ -17,7 +17,7 @@ const Update = () => {
     const [user] = useAuthState(auth);
     UserVerification(user);
 
-    const url = `http://localhost:5000/services/${id}`;
+    const url = `https://gentle-depths-46092.herokuapp.com/services/${id}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())

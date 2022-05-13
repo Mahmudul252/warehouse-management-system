@@ -20,7 +20,7 @@ const MyItems = () => {
     const handleDeleteButton = _id => {
         const proceed = window.confirm('Are you sure you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/services/${_id}`;
+            const url = `https://gentle-depths-46092.herokuapp.com/services/${_id}`;
             fetch(url, {
                 method: 'delete'
             })

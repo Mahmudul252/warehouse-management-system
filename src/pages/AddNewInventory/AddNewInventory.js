@@ -8,7 +8,7 @@ import UserVerification from '../Login/UserVerification/UserVerification';
 const AddNewInventory = () => {
     const [user] = useAuthState(auth);
     UserVerification(user);
-    const url = `http://localhost:5000/services`;
+    const url = `https://gentle-depths-46092.herokuapp.com/services`;
 
     const handleAddButton = event => {
         event.preventDefault();
