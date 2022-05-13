@@ -1,13 +1,11 @@
 import React from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import useMyItems from '../../hooks/useMyItems';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import UserVerification from '../Login/UserVerification/UserVerification';
 
 const AddNewInventory = () => {
-    const [myItem, setMyItem] = useMyItems();
     const [user] = useAuthState(auth);
     UserVerification(user);
     const url = `http://localhost:5000/services`;
@@ -15,16 +13,13 @@ const AddNewInventory = () => {
     const handleAddButton = event => {
         event.preventDefault();
         const itemName = event.target.itemName.value;
-        const supplier = event.target.supplier.value;
         const quantity = event.target.quantity.value;
         const price = event.target.price.value;
         const img = event.target.img.value;
         const description = event.target.description.value;
 
-        const userEmail = user?.email;
-        const customID = JSON.stringify(Math.random());
-        const item = { customID, itemName, supplier, quantity, price, img, description };
-        const addedItem = { ...item, userEmail };
+        const supplier = (user?.email).split("@")[0];
+        const item = { itemName, supplier, quantity, price, img, description };
 
         fetch(url, {
             method: 'post',
@@ -36,7 +31,6 @@ const AddNewInventory = () => {
             .then(res => res.json())
             .then(() => {
                 toast('Item added successfully!');
-                setMyItem(addedItem);
                 event.target.reset();
             });
 
@@ -48,11 +42,6 @@ const AddNewInventory = () => {
                 {/* itemName */}
                 <FloatingLabel controlId="floatingInput" label="Item Name" className="mb-3">
                     <Form.Control name="itemName" type="text" placeholder="Enter Item Name" required />
-                </FloatingLabel>
-
-                {/* Supplier Name */}
-                <FloatingLabel controlId="floatingInput" label="Supplier" className="mb-3">
-                    <Form.Control name="supplier" type="text" placeholder="Enter Supplier Name" required />
                 </FloatingLabel>
 
                 {/* Quantity */}

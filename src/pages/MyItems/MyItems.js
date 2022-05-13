@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import useItems from '../../hooks/useItems';
 import MyItem from '../MyItem/MyItem';
@@ -9,17 +9,15 @@ import UserVerification from '../Login/UserVerification/UserVerification';
 const MyItems = () => {
     const [items] = useItems();
     const [user] = useAuthState(auth);
+    const [userStoredItems, setUserStoredItems] = useState([]);
     const [myStoredItems, setMyStoredItems] = useState([]);
     UserVerification(user);
+    useEffect(() => {
+        const userItems = items?.filter(item => item.supplier === (user?.email).split("@")[0]);
+        setUserStoredItems(userItems)
+    }, [items, user?.email]);
 
-    const userStoredItems = JSON.parse(localStorage.getItem(user.email));
-    let userItems = [];
-    userStoredItems?.map(userStoredItem => {
-        const userItem = items.find(item => item.customID === userStoredItem.customID);
-        userItems = [...userItems, userItem];
-    });
-
-    const handleDeleteButton = (_id, customID) => {
+    const handleDeleteButton = _id => {
         const proceed = window.confirm('Are you sure you want to delete?');
         if (proceed) {
             const url = `http://localhost:5000/services/${_id}`;
@@ -32,8 +30,8 @@ const MyItems = () => {
                         const remaining = myStoredItems.filter(item => item._id !== _id);
                         setMyStoredItems(remaining);
 
-                        const userRemainingItems = userStoredItems?.filter(userStoredItem => userStoredItem.customID !== customID);
-                        localStorage.setItem(user?.email, JSON.stringify(userRemainingItems));
+                        const userRemainingItems = userStoredItems?.filter(userStoredItem => userStoredItem._id !== _id);
+                        setUserStoredItems(userRemainingItems);
                         toast('Item Deleted!');
                     }
                 });
@@ -44,7 +42,7 @@ const MyItems = () => {
             <div className='row justify-content-center mx-auto'>
                 <h2 className='text-center display-6 mb-3 mt-3'>My Items</h2>
                 {
-                    userItems.map(userItem =>
+                    userStoredItems.map(userItem =>
                         <MyItem
                             key={Math.random()}
                             userItem={userItem}
